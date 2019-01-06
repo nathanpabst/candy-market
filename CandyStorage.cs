@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace candy_market
 {
@@ -22,9 +23,13 @@ namespace candy_market
         };
 
 
-        internal IList<string> GetCandyTypes()
+        public IList<string> GetNames()
         {
-            throw new NotImplementedException();
+            return _candies.Select(c => c.Name).Distinct().ToList();
+        }
+        public IList<string> GetCandyTypes()
+        {
+            return _candies.Select(c => c.Type).Distinct().ToList();
         }
 
         internal void SaveNewCandy(ConsoleKey key)

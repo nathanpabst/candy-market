@@ -8,6 +8,21 @@ namespace candy_market
         {
             var db = SetupNewApp();
             var userInput = MainMenu(db);
+
+            while (userInput.Key != ConsoleKey.D0)
+            {
+                userInput = MainMenu(db);
+                if (userInput.Key == ConsoleKey.D2)
+                {
+                    var candyTypeMenu = new View()
+                        .AddMenuOption("What type of candy would you like?");
+                        Console.Write(candyTypeMenu.GetFullMenu());
+                    int selection;
+                    var key = Console.ReadKey().KeyChar.ToString();
+                    int.TryParse(key, out selection);
+                    Console.WriteLine(key);
+                }
+            }
         }
 
         internal static CandyStorage SetupNewApp()
@@ -24,8 +39,8 @@ namespace candy_market
         internal static ConsoleKeyInfo MainMenu(CandyStorage db)
         {
             View mainMenu = new View()
-                .AddMenuOption("Did you just get some new candy? Add it here.")
-                .AddMenuOption("Do you want to eat some candy? Take it here.")
+                .AddMenuOption("Add new candy")
+                .AddMenuOption("Eat candy")
                 .AddMenuText("Press 0 to exit.");
             Console.Write(mainMenu.GetFullMenu());
             var userOption = Console.ReadKey();
@@ -42,6 +57,21 @@ namespace candy_market
 
             var selectedCandyType = Console.ReadKey();
             db.SaveNewCandy(selectedCandyType.Key);
+
         }
+           
+        //***********EAT CANDY**************************//
+            internal static void EatCandy(CandyStorage db)
+            {
+                var candyType = db.GetCandyTypes();
+                var candyTypeMenu = new View()
+                    .AddMenuText("Which type of candy would you like?")
+                    .AddMenuOptions(candyType);
+                Console.Write(candyTypeMenu.GetFullMenu());
+                Console.ReadKey();
+
+
+                
+            }
     }
 }
