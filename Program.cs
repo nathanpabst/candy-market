@@ -17,15 +17,8 @@ namespace candy_market
                     var candyTypeMenu = new View()
                         .AddMenuOption("What type of candy would you like?");
                         Console.Write(candyTypeMenu.GetFullMenu());
-                    int selection;
-                    var key = Console.ReadKey().KeyChar.ToString();
-                    int.TryParse(key, out selection);
-                    if (selection == 1)
-                    {
-                        EatCandy(db);
-                    }
-
-                    //Console.WriteLine(key);
+                    DisplayCandyTypes(db);
+                    
                 }
             }
         }
@@ -66,17 +59,30 @@ namespace candy_market
         }
            
         //***********EAT CANDY**************************//
-            internal static void EatCandy(CandyStorage db)
+            internal static void DisplayCandyTypes(CandyStorage db)
             {
                 var candyType = db.GetCandyTypes();
                 var candyTypeMenu = new View()
                     .AddMenuText("Which type of candy would you like?")
                     .AddMenuOptions(candyType);
                 Console.Write(candyTypeMenu.GetFullMenu());
+
+                var selectedType = Console.ReadKey().KeyChar.ToString();
+            
+                DisplayCandyNames(db);
             
 
-                Console.ReadKey();
-                
+            Console.ReadKey();                
             }
+
+        internal static void DisplayCandyNames(CandyStorage db)
+        {
+            var candyName = db.GetNames();
+            var candyNameMenu = new View()
+                .AddMenuText("Select from the following:")
+                .AddMenuOptions(candyName);
+            Console.Write(candyNameMenu.GetFullMenu());
+            Console.ReadKey();
+        }
     }
 }
