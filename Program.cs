@@ -20,7 +20,12 @@ namespace candy_market
                     int selection;
                     var key = Console.ReadKey().KeyChar.ToString();
                     int.TryParse(key, out selection);
-                    Console.WriteLine(key);
+                    if (selection == 1)
+                    {
+                        EatCandy(db);
+                    }
+
+                    //Console.WriteLine(key);
                 }
             }
         }
@@ -68,9 +73,9 @@ namespace candy_market
                     .AddMenuText("Which type of candy would you like?")
                     .AddMenuOptions(candyType);
                 Console.Write(candyTypeMenu.GetFullMenu());
+            
+
                 Console.ReadKey();
-
-
                 
             }
     }
