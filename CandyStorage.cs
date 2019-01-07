@@ -27,6 +27,16 @@ namespace candy_market
         {
             return _candies.Select(c => c.Name).Distinct().ToList();
         }
+
+        public IList<string> GetNamesByType(string candyType)
+        {
+            return _candies
+                .Where(c => c.Type == candyType)
+                .Select(c => c.Name)
+                .Distinct()
+                .ToList();
+        }
+
         public IList<string> GetCandyTypes()
         {
             return _candies.Select(c => c.Type).Distinct().ToList();

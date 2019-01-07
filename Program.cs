@@ -58,7 +58,7 @@ namespace candy_market
 
         }
            
-        //***********EAT CANDY**************************//
+        //***********MENU OPTION 2**************************//
             internal static void DisplayCandyTypes(CandyStorage db)
             {
                 var candyType = db.GetCandyTypes();
@@ -66,22 +66,24 @@ namespace candy_market
                     .AddMenuText("Which type of candy would you like?")
                     .AddMenuOptions(candyType);
                 Console.Write(candyTypeMenu.GetFullMenu());
-
-                var selectedType = Console.ReadKey().KeyChar.ToString();
-            
                 DisplayCandyNames(db);
-            
 
-            Console.ReadKey();                
+                Console.ReadKey();                
             }
 
         internal static void DisplayCandyNames(CandyStorage db)
         {
-            var candyName = db.GetNames();
-            var candyNameMenu = new View()
-                .AddMenuText("Select from the following:")
-                .AddMenuOptions(candyName);
-            Console.Write(candyNameMenu.GetFullMenu());
+                var selectedType = Console.ReadKey().KeyChar.ToString();
+                if (selectedType == "1")
+                {
+                    var listType = db.GetNamesByType("hard");
+                    var candyNameMenu = new View()
+                        .AddMenuText("Select from the following:")
+                        .AddMenuOptions(listType);
+                    Console.Write(candyNameMenu.GetFullMenu());
+
+                }
+            //var candyName = db.GetNames();
             Console.ReadKey();
         }
     }
