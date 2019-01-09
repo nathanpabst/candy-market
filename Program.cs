@@ -97,8 +97,16 @@ namespace candy_market
                         .AddMenuText("Select from the following:")
                         .AddMenuOptions(listType);
             Console.Write(candyNameMenu.GetFullMenu());
+            EatCandy(db);
 
             Console.ReadKey();
+        }
+
+        internal static void EatCandy(CandyStorage db)
+        {
+            var selectedName = Console.ReadKey().KeyChar.ToString();
+            
+            
         }
     }
 }
