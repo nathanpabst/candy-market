@@ -8,7 +8,7 @@ namespace candy_market
         public string Name { get; set; }
         public string Manufacturer { get; set; }
         public string Type { get; set; }
-        //public int Quantity { get; set; }
+        public int Quantity { get; set; }
         public DateTime Date { get; set; }
     }
 } 
