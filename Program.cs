@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace candy_market
 {
@@ -74,18 +75,22 @@ namespace candy_market
         internal static void DisplayCandyNames(CandyStorage db)
         {
             var selectedType = Console.ReadKey().KeyChar.ToString();
-            var listType = db.GetNamesByType("");
+            var listType = new List<string>();
             if (selectedType == "1")
             {
-                listType = db.GetNamesByType("hard");
+                listType = db.GetNamesByType("hard") as List<string>;
             }
             else if (selectedType == "2")
             {
-                listType = db.GetNamesByType("chocolate");
+                listType = db.GetNamesByType("chocolate") as List<string>;
             }
             else if (selectedType == "3")
             {
-                listType = db.GetNamesByType("chewy");
+                listType = db.GetNamesByType("chewy") as List<string>;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
             }
 
             var candyNameMenu = new View()
